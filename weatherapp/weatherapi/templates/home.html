@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Alert Agent</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <form id="post-form">
+        <label for="param1">Param1:</label>
+        <input type="text" id="param1" name="param1" >
+        <br>
+        <!-- <label for="param2">Param2:</label>
+        <input type="text" id="param2" name="param2" value="Value2">
+        <br>
+        <label for="param2">Param2:</label>
+        <input type="text" id="param2" name="param2" value="Value2">
+        <br> -->
+        <button type="submit">Submit POST</button>
+    </form>
+        
+        <div id="weatherResult">
+            <p>
+                {{temp}}
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+        let intervalId = null;
+        
+        function startPostRequests() {
+            intervalId = setInterval(sendPostRequest, 3000); // Send a POST request every 3 seconds
+        }
+        
+        function stopPostRequests() {
+            clearInterval(intervalId);
+        }
+
+        function sendPostRequest() {
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken') // Include the CSRF token
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Function to get the CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        document.getElementById('startButton').addEventListener('click', startPostRequests);
+        document.getElementById('stopButton').addEventListener('click', stopPostRequests);
+    </script>
+</body>
+</html>
