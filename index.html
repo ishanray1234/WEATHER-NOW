@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Alert Agent</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Alert Agent</h1>
+        <div class="form">
+            <label for="location">Location:</label>
+            <input type="text" id="location" placeholder="Enter location">
+            
+            <label for="minTemp">Minimum Temperature:</label>
+            <input type="number" id="minTemp" placeholder="Enter min temp">
+            
+            <label for="maxTemp">Maximum Temperature:</label>
+            <input type="number" id="maxTemp" placeholder="Enter max temp">
+            
+            <button id="getWeatherBtn">Get Weather</button>
+        </div>
+        
+        <div id="weatherResult">
+            <!-- Weather information will be displayed here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
